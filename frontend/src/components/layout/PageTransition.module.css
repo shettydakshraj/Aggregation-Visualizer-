@@ -1,0 +1,4 @@
+.wrapper {
+  /* Will-change deferred so GPU only activates during animation */
+  will-change: auto;
+}

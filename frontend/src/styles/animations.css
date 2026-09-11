@@ -1,0 +1,83 @@
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+/* Clip-path reveal — text slides up from below a mask */
+@keyframes revealUp {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Border draw — used for CTA button */
+@keyframes borderDraw {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+/* Subtle float — hero micro-labels */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--float-rot, 0deg)); }
+  50%       { transform: translateY(-8px) rotate(var(--float-rot, 0deg)); }
+}
+
+/* Pulse ring — node active state */
+@keyframes pulseRing {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* SVG path draw — chain connector */
+@keyframes drawPath {
+  from { stroke-dashoffset: var(--path-length, 800); }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Spin slow — decorative */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Grid line draw */
+@keyframes gridLineDraw {
+  from { opacity: 0; stroke-dashoffset: 100; }
+  to   { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* ============================================================
+   UTILITY ANIMATION CLASSES
+   ============================================================ */
+
+/* JS-driven: add .is-revealed to trigger */
+.reveal-clip {
+  overflow: hidden;
+}
+.reveal-clip .reveal-inner {
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform var(--dur-l) var(--ease-out),
+              opacity    var(--dur-m) var(--ease-out);
+}
+.reveal-clip.is-revealed .reveal-inner {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+/* Stagger delay helpers */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }

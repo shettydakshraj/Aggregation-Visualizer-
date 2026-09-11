@@ -1,0 +1,9 @@
+.page {
+  min-height: 100vh;
+}
+
+.footer {
+  padding-block: 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}

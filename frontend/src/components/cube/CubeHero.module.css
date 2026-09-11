@@ -1,0 +1,132 @@
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 3rem) 2rem 4rem;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 15%, rgba(127, 204, 138, 0.09) 0%, transparent 70%);
+  border-bottom: 1px solid var(--border);
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(ellipse, rgba(127, 204, 138, 0.16), transparent 75%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(127, 204, 138, 0.08);
+  border: 1px solid rgba(127, 204, 138, 0.25);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+.badgeText {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.titleMono {
+  background: linear-gradient(135deg, #FFFFFF 30%, #C3F2CA 70%, #7FCC8A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 660px;
+  margin-bottom: 2.5rem;
+}
+
+.pillsNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.825rem;
+  font-weight: 500;
+  transition: all var(--dur-s) var(--ease-out);
+}
+
+.pill:hover {
+  border-color: var(--accent-green);
+  color: var(--text-primary);
+  background: rgba(127, 204, 138, 0.06);
+  transform: translateY(-2px);
+}
+
+.pillIcon {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-green);
+  background: rgba(127, 204, 138, 0.12);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+}
+
+.gridLines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  pointer-events: none;
+}

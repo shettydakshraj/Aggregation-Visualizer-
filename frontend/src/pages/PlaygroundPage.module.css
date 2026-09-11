@@ -1,0 +1,41 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.mainSection {
+  padding-block: clamp(2rem, 4vw, 4rem);
+  flex: 1;
+}
+
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1080px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.footer {
+  padding-block: 2.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

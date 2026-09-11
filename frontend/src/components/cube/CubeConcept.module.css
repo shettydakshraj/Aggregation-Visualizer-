@@ -1,0 +1,303 @@
+.section {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+}
+
+.header code {
+  font-family: var(--font-mono);
+  color: var(--accent-green);
+  background: rgba(127, 204, 138, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.tabBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.tabBtn {
+  padding: 0.6rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: all var(--dur-s) var(--ease-out);
+}
+
+.tabBtn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tabActive {
+  color: var(--accent-green) !important;
+  background: rgba(127, 204, 138, 0.1) !important;
+  border: 1px solid rgba(127, 204, 138, 0.3);
+}
+
+/* Tab 1: Sets Grid */
+.setsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.setCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--dur-s) var(--ease-out), border-color var(--dur-s) var(--ease-out);
+}
+
+.setCard:hover {
+  transform: translateY(-3px);
+}
+
+.setBadge {
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  width: fit-content;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.85rem;
+}
+
+.setTitle {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.setDesc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.setVal {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+}
+
+/* Tab 2: Matrix */
+.matrixWrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.matrixHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.matrixTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.badgeGreen {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-green);
+  background: rgba(127, 204, 138, 0.1);
+  border: 1px solid rgba(127, 204, 138, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.matrixTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.matrixTable th {
+  padding: 0.85rem 1.25rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.matrixTable td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.matrixTable code {
+  font-family: var(--font-mono);
+}
+
+.check {
+  color: var(--text-secondary);
+}
+
+.checkGreen {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.cross {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.highlightRow td {
+  background: rgba(127, 204, 138, 0.05);
+}
+
+.totalRow td {
+  border-top: 2px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.totalGreen {
+  color: var(--accent-green);
+}
+
+/* Tab 3: OLAP */
+.olapBox {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.25rem;
+}
+
+.olapGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 960px) {
+  .olapGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.olapTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.olapDesc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.cubeStats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNum {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.statLabel {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.syntaxCard {
+  background: #0A0A0F;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border-hover);
+}
+
+.syntaxTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+}
+
+.codeSnippet {
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #E1E4E8;
+}
+
+.kw {
+  color: #79B8FF;
+}
+
+.kwAccent {
+  color: #7FCC8A;
+  font-weight: 700;
+}
+
+.fn {
+  color: #B392F0;
+}
