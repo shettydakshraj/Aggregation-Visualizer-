@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom';
 import styles from './SiteFooter.module.css';
 
 const TOPICS = [
-  { label: 'GROUP BY', to: '/group-by', badge: 'Phase 2', color: '#4F7FFF' },
-  { label: 'ROLLUP',   to: '/rollup',   badge: 'Phase 3', color: '#C8A96E' },
-  { label: 'CUBE',     to: '/cube',     badge: 'Phase 4', color: '#7FCC8A' },
-  { label: 'Playground', to: '/playground', badge: 'Phase 5', color: '#FF7F8A' },
+  { label: 'GROUP BY', to: '/group-by', badge: '1D Buckets', color: '#4F7FFF' },
+  { label: 'ROLLUP',   to: '/rollup',   badge: 'Hierarchy',  color: '#C8A96E' },
+  { label: 'CUBE',     to: '/cube',     badge: 'OLAP Hypercube', color: '#7FCC8A' },
+  { label: 'Playground', to: '/playground', badge: 'Live SQL', color: '#FF7F8A' },
+];
+
+const ACADEMIC_LINKS = [
+  { label: 'Learn Curriculum', to: '/learn' },
+  { label: 'User Manual (Help)', to: '/help' },
+  { label: 'Developed By Team', to: '/developed-by' },
+  { label: 'Download Report', to: '/download' },
 ];
 
 export default function SiteFooter() {
@@ -36,8 +43,8 @@ export default function SiteFooter() {
           </div>
 
           {/* Navigation */}
-          <nav className={styles.navCol} aria-label="Footer navigation">
-            <span className={styles.colLabel}>Chapters</span>
+          <nav className={styles.navCol} aria-label="Footer topics navigation">
+            <span className={styles.colLabel}>Core Chapters</span>
             <Link to="/" className={styles.footerLink}>
               <span>Landing — Learning Path</span>
             </Link>
@@ -49,9 +56,23 @@ export default function SiteFooter() {
             ))}
           </nav>
 
+          {/* Academic Modules */}
+          <nav className={styles.navCol} aria-label="Footer academic modules">
+            <span className={styles.colLabel}>Academic Modules</span>
+            {ACADEMIC_LINKS.map(({ label, to }) => (
+              <Link key={to} to={to} className={styles.footerLink}>
+                <span>{label}</span>
+              </Link>
+            ))}
+          </nav>
+
           {/* Project Info */}
           <div className={styles.infoCol}>
-            <span className={styles.colLabel}>Project Info</span>
+            <span className={styles.colLabel}>Project Supervision</span>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Guided By</span>
+              <span className={styles.infoValue}>Dr. Swaminathan A (Assistant Professor)</span>
+            </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Subject</span>
               <span className={styles.infoValue}>Database Management Systems (DBMS)</span>
@@ -62,11 +83,7 @@ export default function SiteFooter() {
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>SQL Engine</span>
-              <span className={styles.infoValue}>AlaSQL v4 (In-Browser, Zero Setup)</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Currency</span>
-              <span className={styles.infoValue}>Indian Rupees (₹)</span>
+              <span className={styles.infoValue}>AlaSQL (In-Browser Execution)</span>
             </div>
           </div>
         </div>
@@ -74,10 +91,10 @@ export default function SiteFooter() {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <p className={styles.copy}>
-            © {year} SQL Aggregation Visualizer · DBMS Project
+            © {year} SQL Aggregation Visualizer · DBMS Academic Project
           </p>
           <p className={styles.madeWith}>
-            Built with <span className={styles.heart}>♥</span> for DBMS
+            Guided by Dr. Swaminathan A &middot; VIT
           </p>
         </div>
       </div>

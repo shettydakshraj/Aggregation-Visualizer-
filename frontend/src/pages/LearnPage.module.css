@@ -1,0 +1,133 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-primary);
+  padding-top: var(--nav-h);
+}
+
+.hero {
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem) 0;
+  border-bottom: 1px solid var(--border);
+  background: radial-gradient(circle at 50% 0%, rgba(79, 127, 255, 0.08) 0%, transparent 70%);
+}
+
+.heroContent {
+  max-width: 860px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0.75rem 0 1.25rem 0;
+  color: var(--text-primary);
+}
+
+.gradientText {
+  background: linear-gradient(135deg, var(--accent) 0%, #7FCC8A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroDesc {
+  font-family: var(--font-ui);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 2rem 0;
+}
+
+.quickNav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.navPill {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--dur-s) var(--ease-out);
+}
+
+.navPill:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.navPillActive {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+}
+
+.main {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.topicSection {
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+}
+
+.topicHeading {
+  font-family: var(--font-ui);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.videoWrapper {
+  margin-top: 2rem;
+}
+
+.videoSectionTitle {
+  margin-bottom: 1rem;
+}
+
+.videoSub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.videoSectionTitle h3 {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.referencesWrapper {
+  margin-top: clamp(4rem, 8vw, 6rem);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}

@@ -24,8 +24,8 @@ export default function YouTubeLesson() {
           <div className={styles.playerWrapper}>
             <iframe
               className={styles.iframe}
-              src="https://www.youtube-nocookie.com/embed/9rTz2puvgjg?rel=0&modestbranding=1"
-              title="SQL GROUP BY and HAVING Clause Explained"
+              src="https://www.youtube-nocookie.com/embed/VQf0V6Wwbf4?rel=0"
+              title="GROUP BY and HAVING Clause in SQL — Neso Academy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
@@ -36,7 +36,7 @@ export default function YouTubeLesson() {
               <div className={styles.avatar}>SQL</div>
               <div>
                 <h3 className={styles.videoTitle}>GROUP BY &amp; HAVING Essentials</h3>
-                <span className={styles.authorName}>Curated Curriculum Video</span>
+                <span className={styles.authorName}>Neso Academy · Verified Academic Curriculum</span>
               </div>
             </div>
 
@@ -44,6 +44,25 @@ export default function YouTubeLesson() {
               Learn how the database engine interprets your grouping keys, sorts row partitions in memory, and maps 
               aggregate mathematical accumulators to compute instant summary totals.
             </p>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <a
+                href="https://www.youtube.com/watch?v=VQf0V6Wwbf4"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.8125rem',
+                  color: 'var(--accent)',
+                  textDecoration: 'none'
+                }}
+              >
+                Watch on YouTube ↗
+              </a>
+            </div>
 
             <div className={styles.timestampsHeader}>
               <span className={styles.tsBadge}>Key Chapter Milestones</span>

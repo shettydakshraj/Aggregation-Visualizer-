@@ -25,8 +25,8 @@ export default function CubeVideo() {
           <div className={styles.playerWrapper}>
             <iframe
               className={styles.iframe}
-              src="https://www.youtube-nocookie.com/embed/3243y8GgH1A?rel=0&start=360&modestbranding=1"
-              title="SQL CUBE and Multidimensional Aggregation Explained"
+              src="https://www.youtube-nocookie.com/embed/9d7fjBgtxos?rel=0"
+              title="Cube in SQL Server — kudvenkat"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
@@ -37,7 +37,7 @@ export default function CubeVideo() {
               <div className={styles.avatar}>⬡³</div>
               <div>
                 <h3 className={styles.videoTitle}>CUBE &amp; OLAP Hypercubes</h3>
-                <span className={styles.authorName}>Curated Curriculum Video</span>
+                <span className={styles.authorName}>kudvenkat · Verified Curriculum Video</span>
               </div>
             </div>
 
@@ -45,6 +45,25 @@ export default function CubeVideo() {
               Discover how CUBE traverses orthogonal dimensions to generate cross-sectional subtotals 
               without requiring separate queries or complex joins.
             </p>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <a
+                href="https://www.youtube.com/watch?v=9d7fjBgtxos"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.8125rem',
+                  color: 'var(--accent-green)',
+                  textDecoration: 'none'
+                }}
+              >
+                Watch on YouTube ↗
+              </a>
+            </div>
 
             <div className={styles.timestampsHeader}>
               <span className={styles.tsBadge}>Curriculum Milestones</span>

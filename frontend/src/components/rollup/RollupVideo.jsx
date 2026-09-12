@@ -24,8 +24,8 @@ export default function RollupVideo() {
           <div className={styles.playerWrapper}>
             <iframe
               className={styles.iframe}
-              src="https://www.youtube-nocookie.com/embed/3243y8GgH1A?rel=0&modestbranding=1"
-              title="SQL ROLLUP and CUBE Explained"
+              src="https://www.youtube-nocookie.com/embed/HLTdfCtfIJs?rel=0"
+              title="Rollup in SQL Server — kudvenkat"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
@@ -36,7 +36,7 @@ export default function RollupVideo() {
               <div className={styles.avatar}>Σ▲</div>
               <div>
                 <h3 className={styles.videoTitle}>ROLLUP &amp; Hierarchy Architecture</h3>
-                <span className={styles.authorName}>Curated Curriculum Video</span>
+                <span className={styles.authorName}>kudvenkat · Verified Curriculum Video</span>
               </div>
             </div>
 
@@ -44,6 +44,25 @@ export default function RollupVideo() {
               Watch how the query optimizer evaluates super-aggregate grouping sets, handles NULL values generated 
               by subtotal rollups, and calculates grand totals in a single table scan.
             </p>
+
+            <div style={{ marginBottom: '1rem' }}>
+              <a
+                href="https://www.youtube.com/watch?v=HLTdfCtfIJs"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.8125rem',
+                  color: 'var(--accent-warm)',
+                  textDecoration: 'none'
+                }}
+              >
+                Watch on YouTube ↗
+              </a>
+            </div>
 
             <div className={styles.timestampsHeader}>
               <span className={styles.tsBadge}>Curriculum Milestones</span>
