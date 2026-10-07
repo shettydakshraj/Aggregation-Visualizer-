@@ -6,6 +6,7 @@ export default function PlaygroundEditor({
   onChangeQuery,
   onRun,
   onReset,
+  onOpenImportModal = null,
   latency,
   rowCount,
   error
@@ -63,6 +64,16 @@ export default function PlaygroundEditor({
         </div>
 
         <div className={styles.headerActions}>
+          {onOpenImportModal && (
+            <button
+              type="button"
+              className={styles.toolBtn}
+              onClick={onOpenImportModal}
+              title="Import CSV, JSON, or Excel dataset"
+            >
+              <span>📥 Import</span>
+            </button>
+          )}
           <button type="button" className={styles.toolBtn} onClick={handleFormat} title="Capitalize & format keywords">
             <span>✨ Format</span>
           </button>

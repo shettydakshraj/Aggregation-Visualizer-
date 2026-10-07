@@ -1,12 +1,33 @@
 import { useState } from 'react';
 import styles from './SchemaViewer.module.css';
 
-export default function SchemaViewer({ schemas = [], rawData = {} }) {
-  const [activeTableIndex, setActiveTableIndex] = useState(0);
+export default function SchemaViewer({
+  schemas = [],
+  rawData = {},
+  activeTable = null,
+  onSelectTable = null,
+  onOpenImportModal = null
+}) {
+  const [internalActiveIndex, setInternalActiveIndex] = useState(0);
   const [showDataPreview, setShowDataPreview] = useState(false);
 
-  const currentSchema = schemas[activeTableIndex] || schemas[0];
-  const currentRecords = rawData[currentSchema?.table] || [];
+  // If activeTable is provided, sync with its index; otherwise use internalActiveIndex
+  const matchedIndex = activeTable
+    ? schemas.findIndex((s) => s.table?.toLowerCase() === activeTable?.toLowerCase())
+    : -1;
+  const activeTableIndex = matchedIndex !== -1 ? matchedIndex : internalActiveIndex;
+  const safeActiveIndex =
+    activeTableIndex >= 0 && activeTableIndex < schemas.length ? activeTableIndex : 0;
+
+  const currentSchema = schemas[safeActiveIndex] || schemas[0];
+  const currentRecords = (currentSchema && rawData[currentSchema.table]) || [];
+
+  const handleTabClick = (idx, tableName) => {
+    setInternalActiveIndex(idx);
+    if (onSelectTable) {
+      onSelectTable(tableName);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -17,17 +38,31 @@ export default function SchemaViewer({ schemas = [], rawData = {} }) {
           <span className={styles.tableCount}>{schemas.length} Tables</span>
         </div>
 
-        <div className={styles.tableTabs}>
-          {schemas.map((s, idx) => (
+        <div className={styles.headerRight}>
+          <div className={styles.tableTabs}>
+            {schemas.map((s, idx) => (
+              <button
+                key={s.table}
+                type="button"
+                className={`${styles.tableTabBtn} ${safeActiveIndex === idx ? styles.tableTabActive : ''}`}
+                onClick={() => handleTabClick(idx, s.table)}
+              >
+                {s.table}
+              </button>
+            ))}
+          </div>
+
+          {onOpenImportModal && (
             <button
-              key={s.table}
               type="button"
-              className={`${styles.tableTabBtn} ${activeTableIndex === idx ? styles.tableTabActive : ''}`}
-              onClick={() => setActiveTableIndex(idx)}
+              className={styles.uploadBtn}
+              onClick={onOpenImportModal}
+              title="Import CSV, JSON, or Excel dataset"
             >
-              {s.table}
+              <span>📥</span>
+              <span>Upload Data</span>
             </button>
-          ))}
+          )}
         </div>
       </div>
 
@@ -35,7 +70,7 @@ export default function SchemaViewer({ schemas = [], rawData = {} }) {
         <p className={styles.tableDesc}>{currentSchema?.description}</p>
 
         <div className={styles.columnsGrid}>
-          {currentSchema?.columns.map((col) => (
+          {currentSchema?.columns?.map((col) => (
             <div key={col.name} className={styles.colItem}>
               <div className={styles.colTop}>
                 <span className={styles.colName}>{col.name}</span>
@@ -64,27 +99,38 @@ export default function SchemaViewer({ schemas = [], rawData = {} }) {
             <table className={styles.rawTable}>
               <thead>
                 <tr>
-                  {currentSchema?.columns.map((c) => (
+                  {currentSchema?.columns?.map((c) => (
                     <th key={c.name}>{c.name}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {currentRecords.map((row, rIdx) => (
-                  <tr key={rIdx}>
-                    {currentSchema?.columns.map((c) => (
-                      <td key={c.name}>
-                        {typeof row[c.name] === 'number' && c.name.includes('budget')
-                          ? `₹${row[c.name].toLocaleString('en-IN')}`
-                          : typeof row[c.name] === 'number' && c.name.includes('cost')
-                          ? `₹${row[c.name].toLocaleString('en-IN')}`
-                          : typeof row[c.name] === 'number' && c.name.includes('wage')
-                          ? `₹${row[c.name].toLocaleString('en-IN')}`
-                          : String(row[c.name] ?? '')}
-                      </td>
-                    ))}
+                {currentRecords.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={Math.max(currentSchema?.columns?.length || 1, 1)}
+                      style={{ textAlign: 'center', opacity: 0.6, padding: '1.25rem' }}
+                    >
+                      No records in this table yet. Use INSERT INTO to add rows.
+                    </td>
                   </tr>
-                ))}
+                ) : (
+                  currentRecords.map((row, rIdx) => (
+                    <tr key={rIdx}>
+                      {currentSchema?.columns?.map((c) => (
+                        <td key={c.name}>
+                          {typeof row[c.name] === 'number' && c.name.includes('budget')
+                            ? `₹${row[c.name].toLocaleString('en-IN')}`
+                            : typeof row[c.name] === 'number' && c.name.includes('cost')
+                            ? `₹${row[c.name].toLocaleString('en-IN')}`
+                            : typeof row[c.name] === 'number' && c.name.includes('wage')
+                            ? `₹${row[c.name].toLocaleString('en-IN')}`
+                            : String(row[c.name] ?? '')}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

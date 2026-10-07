@@ -13,6 +13,24 @@ export default function PlaygroundInsights({ query = '', rowCount = 0 }) {
     const hasHaving = q.includes('HAVING');
     const hasJoin = q.includes('JOIN');
     const hasCase = q.includes('CASE') && q.includes('WHEN');
+    const hasCreateTable = q.includes('CREATE TABLE');
+    const hasInsert = q.includes('INSERT INTO') || q.includes('INSERT');
+
+    if (hasCreateTable) {
+      features.push('DDL (CREATE TABLE)');
+      insights.push({
+        title: 'Dynamic Schema Registration',
+        text: 'Creates a custom in-memory relational table. Newly defined schemas and column data types are automatically registered in the Schema Explorer.'
+      });
+    }
+
+    if (hasInsert) {
+      features.push('DML (INSERT INTO)');
+      insights.push({
+        title: 'Tuple Record Ingestion',
+        text: 'Inserts structured rows into target relations, immediately queryable with aggregations and inspectable in the raw data preview.'
+      });
+    }
 
     if (hasCube) {
       features.push('CUBE (2^N)');

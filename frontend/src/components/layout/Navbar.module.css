@@ -58,7 +58,7 @@
 .links {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 1.6vw, 2rem);
+  gap: clamp(0.55rem, 1.1vw, 1.35rem);
   list-style: none;
   margin: 0;
   padding: 0;

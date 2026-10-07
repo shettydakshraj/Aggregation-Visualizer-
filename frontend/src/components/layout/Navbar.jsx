@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { label: 'CUBE',         to: '/cube' },
   { label: 'Playground',   to: '/playground' },
   { label: 'Learn',        to: '/learn' },
+  { label: 'Practice',     to: '/practice' },
+  { label: 'Quiz',         to: '/quiz' },
   { label: 'Help',         to: '/help' },
   { label: 'Developed By', to: '/developed-by' },
 ];

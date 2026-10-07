@@ -10,6 +10,8 @@ const TOPICS = [
 
 const ACADEMIC_LINKS = [
   { label: 'Learn Curriculum', to: '/learn' },
+  { label: 'Practice Questions', to: '/practice' },
+  { label: 'Exam Quiz', to: '/quiz' },
   { label: 'User Manual (Help)', to: '/help' },
   { label: 'Developed By Team', to: '/developed-by' },
   { label: 'Download Report', to: '/download' },

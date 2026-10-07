@@ -14,7 +14,7 @@ const DEFAULT_DATA = [
 ];
 
 export default function CubePlayground() {
-  const [data] = useState(DEFAULT_DATA);
+  const [data, setData] = useState(DEFAULT_DATA);
   const [activeTab, setActiveTab] = useState('query');
   const [editorMode, setEditorMode] = useState('builder');
 
@@ -52,23 +52,76 @@ export default function CubePlayground() {
     }
   }, [col1, col2, aggFunc, aggCol, editorMode]);
 
+  // Prepare data with numerical normalization and common relational alias projections
+  const prepareData = (rows) => {
+    return (rows || []).map(r => {
+      const numCost = r.cost === '' ? 0 : (Number(r.cost) || 0);
+      return {
+        ...r,
+        cost: numCost,
+        amount: numCost,
+        budget: numCost,
+        salary: numCost,
+        quantity: r.quantity !== undefined ? (Number(r.quantity) || 0) : 1,
+        construction_site: r.project || '',
+        site: r.project || '',
+        category: r.material || '',
+      };
+    });
+  };
+
   // Execute CUBE query
   const executeQuery = (queryText) => {
     setErrorMsg(null);
     const start = performance.now();
     try {
-      const q = queryText || sqlQuery;
+      let q = (queryText || sqlQuery || '').trim();
+      if (!q) return;
+
+      // Escape reserved keyword TOTAL in aliases
+      q = q.replace(/\bAS\s+total\b/gi, 'AS [total]');
+
+      const preparedData = prepareData(data);
+      alasql.tables.construction_records = { data: preparedData };
+      alasql.tables.records = { data: preparedData };
+      alasql.tables.projects = { data: preparedData };
+      alasql.tables.data = { data: preparedData };
+
+      const tableMatch = q.match(/FROM\s+([a-zA-Z0-9_]+)/i);
+      if (tableMatch && tableMatch[1]) {
+        alasql.tables[tableMatch[1]] = { data: preparedData };
+      }
+
       let res;
       try {
-        res = alasql(q, [data]);
+        res = alasql(q, [preparedData]);
       } catch {
-        // Compute the 4 grouping sets of CUBE(c1, c2)
-        res = runCubeSimulation(data, col1, col2, aggFunc, aggCol);
+        // Fallback simulation with query column parsing
+        let c1 = col1;
+        let c2 = col2;
+        let fn = aggFunc;
+        let metric = aggCol;
+
+        const groupMatch = q.match(/GROUP\s+BY\s+(?:CUBE\s*\()?\s*([a-zA-Z0-9_]+)\s*(?:,\s*([a-zA-Z0-9_]+))?/i);
+        if (groupMatch) {
+          if (groupMatch[1]) c1 = groupMatch[1];
+          if (groupMatch[2]) c2 = groupMatch[2];
+          else c2 = null;
+        }
+
+        const aggMatch = q.match(/(SUM|COUNT|AVG|MIN|MAX)\s*\(\s*([a-zA-Z0-9_*]+)\s*\)/i);
+        if (aggMatch) {
+          fn = aggMatch[1].toUpperCase();
+          if (aggMatch[2] !== '*') metric = aggMatch[2];
+        }
+
+        res = runCubeSimulation(preparedData, c1, c2, fn, metric);
       }
       const end = performance.now();
-      setQueryResult(res);
+      const finalRes = Array.isArray(res) ? res : [res];
+      setQueryResult(finalRes);
       setExecTime((end - start).toFixed(2));
-      setExplanation(generateExplanation(res, col1, col2));
+      setExplanation(generateExplanation(finalRes, col1, col2));
     } catch (err) {
       setErrorMsg(err.message || 'SQL Execution Error');
       setQueryResult([]);
@@ -77,6 +130,42 @@ export default function CubePlayground() {
 
   // Deterministic CUBE computation (all 2^N combinations)
   const runCubeSimulation = (rows, c1, c2, fn, metric) => {
+    if (!c2) {
+      const map = {};
+      let grandTotal = 0;
+      let grandCount = 0;
+
+      rows.forEach(r => {
+        const v1 = r[c1] !== undefined ? r[c1] : 'Unknown';
+        const mVal = Number(r[metric] !== undefined ? r[metric] : r.cost) || 0;
+
+        if (!map[v1]) map[v1] = { c1Val: v1, count: 0, metricVal: 0 };
+        map[v1].count += 1;
+        map[v1].metricVal += mVal;
+
+        grandTotal += mVal;
+        grandCount += 1;
+      });
+
+      const out = [];
+      Object.keys(map).sort().forEach(k => {
+        const item = map[k];
+        out.push({
+          [c1]: item.c1Val,
+          total_projects: item.count,
+          [`total_${metric}`]: fn === 'AVG' ? Math.round(item.metricVal / item.count) : item.metricVal,
+        });
+      });
+
+      out.push({
+        [c1]: null,
+        total_projects: grandCount,
+        [`total_${metric}`]: fn === 'AVG' ? Math.round(grandTotal / grandCount) : grandTotal,
+      });
+
+      return out;
+    }
+
     const detailMap = {};
     const c1SubMap = {};
     const c2SubMap = {};
@@ -84,9 +173,9 @@ export default function CubePlayground() {
     let grandCount = 0;
 
     rows.forEach(r => {
-      const v1 = r[c1];
-      const v2 = r[c2];
-      const mVal = Number(r[metric]) || 0;
+      const v1 = r[c1] !== undefined ? r[c1] : 'Unknown';
+      const v2 = r[c2] !== undefined ? r[c2] : 'Unknown';
+      const mVal = Number(r[metric] !== undefined ? r[metric] : r.cost) || 0;
 
       // Set 1: (c1, c2)
       const k12 = `${v1}:::${v2}`;
@@ -164,6 +253,7 @@ export default function CubePlayground() {
   }, [data, sqlQuery]);
 
   const handleReset = () => {
+    setData(DEFAULT_DATA);
     setCol1('location');
     setCol2('material');
     setAggFunc('SUM');
@@ -171,13 +261,61 @@ export default function CubePlayground() {
     setEditorMode('builder');
   };
 
+  const handleCellEdit = (rowId, colName, value) => {
+    setData(prev => prev.map(row => {
+      if (row.id === rowId) {
+        return {
+          ...row,
+          [colName]: (colName === 'cost' || colName === 'amount' || colName === 'budget' || colName === 'salary' || colName === 'quantity')
+            ? (value === '' ? '' : (isNaN(Number(value)) ? value : Number(value)))
+            : value,
+        };
+      }
+      return row;
+    }));
+  };
+
+  const handleAddRow = () => {
+    const newId = data.length > 0 ? Math.max(...data.map(d => Number(d.id) || 0)) + 1 : 1;
+    setData([...data, {
+      id: newId,
+      project: 'New Construction Site',
+      material: 'Steel',
+      location: 'North District',
+      cost: 300000,
+    }]);
+  };
+
+  const handleDeleteRow = (id) => {
+    setData(prev => prev.filter(row => row.id !== id));
+  };
+
+  // Determine row classification dynamically
   const getRowClassification = (row) => {
-    const isC1Null = row[col1] === null || row[col1] === undefined;
-    const isC2Null = row[col2] === null || row[col2] === undefined;
+    let activeC1 = col1;
+    let activeC2 = col2;
+
+    if (!(activeC1 in row) && !(activeC2 in row)) {
+      const keys = Object.keys(row).filter(k => 
+        !/^(sum|avg|count|min|max|total|projects|projects_count|total_cost|total_projects)/i.test(k) &&
+        !/\(.*\)/.test(k)
+      );
+      if (keys.length > 0) activeC1 = keys[0];
+      if (keys.length > 1) activeC2 = keys[1];
+      else activeC2 = null;
+    }
+
+    if (!activeC2 || !(activeC2 in row)) {
+      const isNull = row[activeC1] === null || row[activeC1] === undefined;
+      return isNull ? { type: 'grand', label: 'Grand Total' } : { type: 'detail', label: 'Detail' };
+    }
+
+    const isC1Null = row[activeC1] === null || row[activeC1] === undefined;
+    const isC2Null = row[activeC2] === null || row[activeC2] === undefined;
 
     if (isC1Null && isC2Null) return { type: 'grand', label: 'Grand Total' };
-    if (!isC1Null && isC2Null) return { type: 'locSub', label: `${col1} Subtotal` };
-    if (isC1Null && !isC2Null) return { type: 'matSub', label: `★ ${col2} Subtotal (CUBE)` };
+    if (!isC1Null && isC2Null) return { type: 'locSub', label: `${activeC1} Subtotal` };
+    if (isC1Null && !isC2Null) return { type: 'matSub', label: `★ ${activeC2} Subtotal (CUBE)` };
     return { type: 'detail', label: 'Detail' };
   };
 
@@ -207,7 +345,7 @@ export default function CubePlayground() {
                 className={`${styles.tabBtn} ${activeTab === 'data' ? styles.tabBtnActive : ''}`}
                 onClick={() => setActiveTab('data')}
               >
-                Construction Records ({data.length})
+                Source Data ({data.length} Rows)
               </button>
             </div>
 
@@ -295,6 +433,12 @@ export default function CubePlayground() {
                     setSqlQuery(e.target.value);
                     if (editorMode === 'builder') setEditorMode('manual');
                   }}
+                  onKeyDown={(e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                      e.preventDefault();
+                      executeQuery(sqlQuery);
+                    }
+                  }}
                   rows={4}
                   spellCheck={false}
                 />
@@ -368,7 +512,7 @@ export default function CubePlayground() {
                                 <td key={k}>
                                   {val === null || val === undefined ? (
                                     <span className={styles.nullTag}>NULL</span>
-                                  ) : typeof val === 'number' && (k.includes('cost') || k.includes('total')) ? (
+                                  ) : typeof val === 'number' && (k.toLowerCase().includes('cost') || k.toLowerCase().includes('total') || k.toLowerCase().includes('sum') || k.toLowerCase().includes('avg') || k.toLowerCase().includes('amount') || k.toLowerCase().includes('budget') || k.toLowerCase().includes('salary')) ? (
                                     `₹${val.toLocaleString()}`
                                   ) : (
                                     String(val)
@@ -411,20 +555,61 @@ export default function CubePlayground() {
                       <th>Material</th>
                       <th>Location</th>
                       <th>Cost (₹)</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.map(r => (
                       <tr key={r.id}>
                         <td>{r.id}</td>
-                        <td>{r.project}</td>
-                        <td>{r.material}</td>
-                        <td>{r.location}</td>
-                        <td style={{ color: 'var(--accent-green)', fontFamily: 'var(--font-mono)' }}>₹{r.cost.toLocaleString()}</td>
+                        <td>
+                          <input
+                            className={styles.cellInput}
+                            value={r.project}
+                            onChange={e => handleCellEdit(r.id, 'project', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            className={styles.cellInput}
+                            value={r.material}
+                            onChange={e => handleCellEdit(r.id, 'material', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            className={styles.cellInput}
+                            value={r.location}
+                            onChange={e => handleCellEdit(r.id, 'location', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            className={styles.cellInput}
+                            style={{ color: 'var(--accent-green)', fontFamily: 'var(--font-mono)' }}
+                            type="number"
+                            value={r.cost !== undefined ? r.cost : ''}
+                            onChange={e => handleCellEdit(r.id, 'cost', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <button
+                            className={styles.deleteRowBtn}
+                            onClick={() => handleDeleteRow(r.id)}
+                            title="Delete row"
+                          >
+                            ✕
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div className={styles.addRowBar}>
+                <button className={styles.addRowBtn} onClick={handleAddRow}>
+                  + Add Row
+                </button>
               </div>
             </div>
           )}

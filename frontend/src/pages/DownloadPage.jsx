@@ -161,10 +161,6 @@ GROUP BY zone, status WITH CUBE;`;
               </div>
 
               <div className={styles.reportHeaderRight}>
-                <div className={styles.advisorBox}>
-                  <span className={styles.advisorLabel}>Faculty Advisor</span>
-                  <span className={styles.advisorName}>{reportData.facultyAdvisor}</span>
-                </div>
                 <div className={styles.timestampBadge}>{reportData.timestamp}</div>
               </div>
             </div>
@@ -318,7 +314,7 @@ GROUP BY zone, status WITH CUBE;`;
             {/* Report Footer */}
             <div className={styles.previewFooter}>
               <div className={styles.footerNote}>
-                Official Phase 2 Academic Submission &middot; Supervised by {reportData.facultyAdvisor}
+                DBMS Aggregation Visualizer &middot; Academic Report &middot; Vellore Institute of Technology
               </div>
               <div className={styles.footerActions}>
                 <button onClick={handlePdf} className={styles.inlineActionBtn}>

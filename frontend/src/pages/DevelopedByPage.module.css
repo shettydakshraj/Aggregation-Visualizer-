@@ -91,22 +91,6 @@
   letter-spacing: -0.01em;
 }
 
-.teamNotice {
-  font-family: var(--font-ui);
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin: 0.5rem 0 0 0;
-}
-
-.configCode {
-  font-family: var(--font-mono);
-  background: var(--bg-card);
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  color: var(--accent);
-}
-
 /* Guide Card */
 .guideSection {
   margin-bottom: clamp(4rem, 7vw, 6rem);
@@ -152,6 +136,11 @@
   background: var(--bg-elevated);
   box-shadow: 0 8px 24px rgba(200, 169, 110, 0.2);
   overflow: hidden;
+  transition: transform var(--dur-s) var(--ease-out);
+}
+
+.avatarLarge:hover {
+  transform: scale(1.03);
 }
 
 .monogram {
@@ -165,6 +154,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  display: block;
 }
 
 .guideTag {
@@ -184,15 +175,6 @@
   flex-direction: column;
 }
 
-.guidePre {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.25rem;
-}
-
 .guideName {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.25rem);
@@ -205,7 +187,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--accent-warm);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .guideDept,
@@ -214,16 +196,6 @@
   font-size: 0.9375rem;
   color: var(--text-secondary);
   line-height: 1.4;
-}
-
-.guideBio {
-  font-family: var(--font-ui);
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 1.25rem 0 0 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
 }
 
 /* Team Grid */
@@ -237,32 +209,50 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.75rem;
+  padding: 1.5rem 1.75rem;
   display: flex;
   flex-direction: column;
-  transition: transform var(--dur-s) var(--ease-out), border-color var(--dur-s) var(--ease-out);
+  justify-content: center;
+  transition: transform var(--dur-s) var(--ease-out), border-color var(--dur-s) var(--ease-out), box-shadow var(--dur-s) var(--ease-out);
 }
 
 .memberCard:hover {
   transform: translateY(-3px);
   border-color: var(--border-hover);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
 }
 
 .cardTop {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
 }
 
 .avatarWrapper {
   position: relative;
   flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: border-color var(--dur-s) var(--ease-out), transform var(--dur-s) var(--ease-out);
+}
+
+.memberCard:hover .avatarWrapper {
+  border-color: var(--accent-warm);
+  transform: scale(1.05);
 }
 
 .studentAvatar {
-  width: 64px;
-  height: 64px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -271,27 +261,11 @@
   font-size: 1.25rem;
   font-weight: 700;
   background: var(--bg-elevated);
-  border: 2px solid var(--border);
 }
 
 .color_1 { color: var(--node-1); border-color: var(--node-1); }
 .color_2 { color: var(--node-2); border-color: var(--node-2); }
 .color_3 { color: var(--node-3); border-color: var(--node-3); }
-.color_4 { color: var(--node-4); border-color: var(--node-4); }
-
-.leaderBadge {
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  padding: 0.15rem 0.4rem;
-  background: var(--accent);
-  color: white;
-  border-radius: 999px;
-  font-weight: 700;
-}
 
 .nameBlock {
   flex-grow: 1;
@@ -319,42 +293,4 @@
 .regVal {
   color: var(--text-primary);
   font-weight: 600;
-}
-
-.roleBadge {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--accent);
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  align-self: flex-start;
-}
-
-.contributionText {
-  font-family: var(--font-ui);
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin: 0 0 1.25rem 0;
-  flex-grow: 1;
-}
-
-.cardFooter {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-}
-
-.profileLink {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.profileLink:hover {
-  text-decoration: underline;
 }

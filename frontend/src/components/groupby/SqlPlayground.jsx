@@ -48,17 +48,52 @@ export default function SqlPlayground() {
     ];
   };
 
+  // Prepare data with numerical normalization and common relational alias projections
+  const prepareData = (rows) => {
+    return (rows || []).map(r => {
+      const numCost = r.cost === '' ? 0 : (Number(r.cost) || 0);
+      return {
+        ...r,
+        cost: numCost,
+        amount: numCost,
+        budget: numCost,
+        salary: numCost,
+        quantity: r.quantity !== undefined ? (Number(r.quantity) || 0) : 1,
+        construction_site: r.project || '',
+        site: r.project || '',
+        category: r.material || '',
+      };
+    });
+  };
+
   // Execute SQL query against dataset using in-browser alasql
   const executeQuery = (queryText) => {
     setErrorMsg(null);
     const start = performance.now();
     try {
-      const q = queryText || sqlQuery;
-      const res = alasql(q, [data]);
+      let q = (queryText || sqlQuery || '').trim();
+      if (!q) return;
+
+      // Escape reserved keyword TOTAL in aliases
+      q = q.replace(/\bAS\s+total\b/gi, 'AS [total]');
+
+      const preparedData = prepareData(data);
+      alasql.tables.construction_records = { data: preparedData };
+      alasql.tables.records = { data: preparedData };
+      alasql.tables.projects = { data: preparedData };
+      alasql.tables.data = { data: preparedData };
+
+      const tableMatch = q.match(/FROM\s+([a-zA-Z0-9_]+)/i);
+      if (tableMatch && tableMatch[1]) {
+        alasql.tables[tableMatch[1]] = { data: preparedData };
+      }
+
+      const res = alasql(q, [preparedData]);
       const end = performance.now();
-      setQueryResult(res);
+      const finalRes = Array.isArray(res) ? res : [res];
+      setQueryResult(finalRes);
       setExecTime((end - start).toFixed(2));
-      setExplanation(generateExplanation(res, groupByCol, aggFunc, aggCol));
+      setExplanation(generateExplanation(finalRes, groupByCol, aggFunc, aggCol));
     } catch (err) {
       setErrorMsg(err.message || 'SQL Execution Error');
       setQueryResult([]);
@@ -85,7 +120,9 @@ export default function SqlPlayground() {
       if (row.id === rowId) {
         return {
           ...row,
-          [colName]: colName === 'cost' ? Number(value) || 0 : value,
+          [colName]: (colName === 'cost' || colName === 'amount' || colName === 'budget' || colName === 'salary' || colName === 'quantity')
+            ? (value === '' ? '' : (isNaN(Number(value)) ? value : Number(value)))
+            : value,
         };
       }
       return row;
@@ -93,7 +130,7 @@ export default function SqlPlayground() {
   };
 
   const handleAddRow = () => {
-    const newId = data.length > 0 ? Math.max(...data.map(d => d.id)) + 1 : 1;
+    const newId = data.length > 0 ? Math.max(...data.map(d => Number(d.id) || 0)) + 1 : 1;
     const newRow = {
       id: newId,
       project: 'New Project Site',
@@ -227,6 +264,12 @@ export default function SqlPlayground() {
                     setSqlQuery(e.target.value);
                     if (editorMode === 'builder') setEditorMode('manual');
                   }}
+                  onKeyDown={(e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                      e.preventDefault();
+                      executeQuery(sqlQuery);
+                    }
+                  }}
                   rows={4}
                   spellCheck={false}
                 />
@@ -274,7 +317,7 @@ export default function SqlPlayground() {
                           <tr key={idx}>
                             {Object.entries(row).map(([k, val]) => (
                               <td key={k}>
-                                {typeof val === 'number' && (k.includes('cost') || k.includes('sum') || k.includes('avg') || k.includes('min') || k.includes('max'))
+                                {typeof val === 'number' && (k.toLowerCase().includes('cost') || k.toLowerCase().includes('sum') || k.toLowerCase().includes('avg') || k.toLowerCase().includes('min') || k.toLowerCase().includes('max') || k.toLowerCase().includes('amount') || k.toLowerCase().includes('budget') || k.toLowerCase().includes('salary'))
                                   ? `₹${val.toLocaleString()}`
                                   : String(val)}
                               </td>
@@ -360,7 +403,7 @@ export default function SqlPlayground() {
                         <td>
                           <input
                             type="number"
-                            value={row.cost}
+                            value={row.cost !== undefined ? row.cost : ''}
                             onChange={(e) => handleCellEdit(row.id, 'cost', e.target.value)}
                             className={`${styles.cellInput} ${styles.costInput}`}
                           />
