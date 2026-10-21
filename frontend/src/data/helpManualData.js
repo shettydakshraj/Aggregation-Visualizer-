@@ -30,6 +30,7 @@ export const HELP_STEPS = [
       'Top Navigation Bar: Click GROUP BY, ROLLUP, or CUBE to jump directly to dedicated topic visualizers.',
       'Learn Section: Visit the Learn tab for a unified academic curriculum, verified video masterclasses, and literature citations.',
       'Playground: Jump to the Playground tab to write custom SQL queries and test real datasets.',
+      'Practice & Quiz Arenas: Access targeted concept drills and formal timed examination arenas from the top navigation bar.',
       'Next Topic Footers: At the bottom of each topic page, click the "Next Chapter" card to advance naturally through the learning curriculum.',
     ],
     tip: 'Clicking the "SQL ∇" logo at the top left returns you to the home cinematic showcase at any time.',
@@ -145,5 +146,37 @@ export const HELP_STEPS = [
       'Contrast Audit: All tables, code blocks, 3D visualizers, and text typography are calibrated to maintain strict WCAG AAA readability in both modes.',
     ],
     tip: 'For classroom projector presentations, Day Mode is often preferred for high-ambient-light readability.',
+  },
+  {
+    step: 10,
+    id: 'practice-mode',
+    title: 'How to Use Practice Mode',
+    badge: 'Interactive Drills',
+    summary:
+      'Sharpen your SQL aggregation proficiency through targeted practice drills featuring instant answer checking, comprehensive step-by-step explanations, and real exam questions.',
+    details: [
+      'Configuring Your Session: Customize your practice drills by Topic (GROUP BY, ROLLUP, CUBE, HAVING, Aggregate Functions), Difficulty (Easy, Medium, Hard), Question Type (Single Choice, Multiple Choice, True/False, Output Prediction, Error Identification), and Question Count (5, 10, 20, 30, 50, or All Available).',
+      'Competitive Exam & Academic Sources: Practice real questions curated from GATE CSE, University academic exams, or standard practice sets.',
+      'Instant Answer Verification: Choose your answer and click "Check Answer" to instantly verify correctness and read a detailed conceptual explanation.',
+      'Playground Experimentation: For query output and error diagnosis problems, click "Try in Playground" to load the query directly into the SQL engine and inspect execution outputs.',
+      'Copy SQL & Live Progress: One-click "Copy SQL" lets you copy queries to your clipboard, while the session scoreboard tracks your accuracy percentage in real time.',
+    ],
+    tip: 'When working through output prediction questions, run the query in the Playground to see intermediate grouping buckets firsthand.',
+  },
+  {
+    step: 11,
+    id: 'quiz-arena',
+    title: 'How to Take Tests in Quiz Arena',
+    badge: 'Timed Assessment',
+    summary:
+      'Test your understanding of advanced SQL aggregation under examination conditions with timed test presets, automated scoring, topic mastery breakdowns, and downloadable reports.',
+    details: [
+      'Test Customization: Select topics, difficulty levels, question quantity (up to 50 questions), and duration presets (10, 15, 30, 45, 60 minutes or custom time limits).',
+      'Live Examination Environment: Features a persistent countdown timer with warning alerts, a floating question palette for quick navigation, answered/unanswered status indicators, and reload protection.',
+      'Automatic Timeout Safety: If the timer runs out, the test safely auto-submits your responses to prevent any loss of progress.',
+      'In-Depth Mastery Analytics: Upon completion, view your comprehensive score, percentage grade, time spent, and a topic-by-topic mastery breakdown highlighting your strengths and areas for improvement.',
+      'Review & Export: Walk through question-by-question explanations, and export your official academic exam results in PDF, Word (.docx), or Excel (.xlsx) formats.',
+    ],
+    tip: 'Use the Topic Mastery breakdown on your results card to identify which aggregation concepts need a refresher in the Learn or Practice sections.',
   },
 ];

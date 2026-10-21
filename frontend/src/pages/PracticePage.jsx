@@ -9,6 +9,7 @@ import {
 import SiteFooter from '../components/layout/SiteFooter';
 import styles from './PracticePage.module.css';
 import { formatQuestionSource } from '../utils/questionSource';
+import { cleanQuestionText } from '../utils/textCleaner';
 
 const QUESTION_COUNT_OPTIONS = ['5', '10', '20', '30', '50', 'All Available'];
 
@@ -376,7 +377,7 @@ export default function PracticePage() {
 
                 {/* Question Body */}
                 <div className={styles.questionBody}>
-                  <h3 className={styles.questionText}>{currentQ.question}</h3>
+                  <h3 className={styles.questionText}>{cleanQuestionText(currentQ.question)}</h3>
 
                   {/* Render Table if present */}
                   {currentQ.table && (

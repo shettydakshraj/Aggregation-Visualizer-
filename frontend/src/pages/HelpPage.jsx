@@ -40,7 +40,7 @@ export default function HelpPage() {
               <span className={styles.searchIcon}>🔍</span>
               <input
                 type="text"
-                placeholder="Search user manual (e.g., 'inputs', 'Day/Night', 'subtotal', 'download')..."
+                placeholder="Search user manual (e.g., 'inputs', 'practice', 'quiz', 'subtotal', 'download')..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={styles.searchInput}
@@ -67,7 +67,7 @@ export default function HelpPage() {
             <aside className={styles.tocSidebar} aria-label="Manual Table of Contents">
               <div className={styles.tocHeader}>
                 <span className={styles.tocTitle}>Table of Contents</span>
-                <span className={styles.tocCount}>{filteredSteps.length} / 9 Steps</span>
+                <span className={styles.tocCount}>{filteredSteps.length} / {HELP_STEPS.length} Steps</span>
               </div>
 
               <nav className={styles.tocList}>
@@ -81,7 +81,7 @@ export default function HelpPage() {
                     }}
                     className={`${styles.tocItem} ${activeStepId === item.id ? styles.tocItemActive : ''}`}
                   >
-                    <span className={styles.tocStepNum}>0{item.step}</span>
+                    <span className={styles.tocStepNum}>{String(item.step).padStart(2, '0')}</span>
                     <span className={styles.tocLabel}>{item.title}</span>
                   </button>
                 ))}
@@ -113,7 +113,7 @@ export default function HelpPage() {
                     aria-label={`Step ${step.step}: ${step.title}`}
                   >
                     <div className={styles.stepBadgeRow}>
-                      <span className={styles.stepNumberBadge}>Step {step.step} of 9</span>
+                      <span className={styles.stepNumberBadge}>Step {step.step} of {HELP_STEPS.length}</span>
                       <span className={styles.stepDomainBadge}>{step.badge}</span>
                     </div>
 

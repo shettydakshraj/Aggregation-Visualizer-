@@ -1,5 +1,6 @@
 import { formatTime } from './quizUtils';
 import styles from './Quiz.module.css';
+import { cleanQuestionText } from '../../utils/textCleaner';
 
 export default function QuizPrintReport({
   config,
@@ -168,7 +169,7 @@ export default function QuizPrintReport({
               <span>{isCorrect ? '[ CORRECT: +1 ]' : isAnswered ? '[ INCORRECT: 0 ]' : '[ UNANSWERED: 0 ]'}</span>
             </div>
 
-            <div className={styles.printQText}>{question.question}</div>
+            <div className={styles.printQText}>{cleanQuestionText(question.question)}</div>
 
             {question.sql && (
               <pre style={{ fontSize: '8.5pt', background: '#F0F0F0', padding: '6px', margin: '4px 0' }}>

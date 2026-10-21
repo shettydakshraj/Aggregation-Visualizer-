@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Quiz.module.css';
 import { formatQuestionSource } from '../../utils/questionSource';
+import { cleanQuestionText } from '../../utils/textCleaner';
 
 export default function QuizQuestion({
   question,
@@ -58,7 +59,7 @@ export default function QuizQuestion({
       {/* Question Body */}
       <div className={styles.questionBody}>
         <div className={styles.questionText}>
-          {question.question}
+          {cleanQuestionText(question.question)}
         </div>
 
         {/* Optional Data Table Rendering */}

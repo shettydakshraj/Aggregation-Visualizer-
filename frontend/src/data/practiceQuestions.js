@@ -2,6 +2,7 @@
 // Designed for competitive exam preparation and concept mastery.
 
 export { formatQuestionSource } from '../utils/questionSource.js';
+export { cleanQuestionText, sanitizeQuestion } from '../utils/textCleaner.js';
 
 export const PRACTICE_TOPICS = [
   "All Topics",
@@ -5211,7 +5212,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #1] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5236,7 +5237,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #2] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5261,7 +5262,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #3] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5286,7 +5287,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #4] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -5311,7 +5312,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #5] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -5336,7 +5337,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #6] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5361,7 +5362,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #7] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5386,7 +5387,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #8] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5411,7 +5412,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #9] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5436,7 +5437,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #10] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -5461,7 +5462,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #11] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -5486,7 +5487,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #12] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5511,7 +5512,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #13] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5536,7 +5537,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #14] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5561,7 +5562,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #15] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5586,7 +5587,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #16] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -5611,7 +5612,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #17] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -5636,7 +5637,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #18] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5661,7 +5662,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #19] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5686,7 +5687,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #20] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5711,7 +5712,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #21] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5736,7 +5737,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #22] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -5761,7 +5762,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #23] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -5786,7 +5787,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #24] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5811,7 +5812,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #25] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5836,7 +5837,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #26] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5861,7 +5862,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #27] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5886,7 +5887,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #28] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -5911,7 +5912,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #29] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -5936,7 +5937,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #30] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5961,7 +5962,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #31] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -5986,7 +5987,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #32] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6011,7 +6012,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #33] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6036,7 +6037,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #34] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -6061,7 +6062,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #35] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -6086,7 +6087,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #36] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6111,7 +6112,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #37] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6136,7 +6137,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #38] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6161,7 +6162,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #39] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6186,7 +6187,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #40] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -6211,7 +6212,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #41] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -6236,7 +6237,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #42] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6261,7 +6262,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #43] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6286,7 +6287,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #44] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6311,7 +6312,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #45] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6336,7 +6337,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #46] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -6361,7 +6362,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #47] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -6386,7 +6387,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #48] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6411,7 +6412,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #49] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6436,7 +6437,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #50] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6461,7 +6462,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #51] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6486,7 +6487,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #52] Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes ROLLUP operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY ROLLUP(category);",
     "table": null,
     "options": [
@@ -6511,7 +6512,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Numerical",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #53] Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes CUBE operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY CUBE(category);",
     "table": null,
     "options": [
@@ -6536,7 +6537,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #54] Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Mixed operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6561,7 +6562,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Application",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #55] Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes GROUP BY operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6586,7 +6587,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #56] Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes Aggregate Functions operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [
@@ -6611,7 +6612,7 @@ export const PRACTICE_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Practice",
     "year": null,
-    "question": "[Practice Lab #57] Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
+    "question": "Which statement accurately describes HAVING operational mechanics when processing analytical queries with multiple aggregate expressions?",
     "sql": "SELECT category, COUNT(*), SUM(sales), AVG(margin)\nFROM business_ledger\nGROUP BY category;",
     "table": null,
     "options": [

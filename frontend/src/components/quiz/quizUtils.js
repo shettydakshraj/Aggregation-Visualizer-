@@ -1,6 +1,7 @@
 // Utility functions for SQL Aggregation Quiz session management,
 // question candidate pool filtering, balanced sampling, option shuffling, and scoring.
 import { QUIZ_QUESTIONS } from '../../data/quizQuestions.js';
+import { cleanQuestionText } from '../../utils/textCleaner.js';
 
 export const QUIZ_TOPICS = [
   'All Topics',
@@ -178,9 +179,11 @@ export function prepareQuizQuestions({
 
   // Shuffle options if requested, ensuring correctAnswer index stays 100% accurate
   return selected.map((q) => {
+    const cleanedQuestion = cleanQuestionText(q.question);
     if (!shuffleOptions || !Array.isArray(q.options) || q.options.length <= 1) {
       return {
         ...q,
+        question: cleanedQuestion,
         options: [...q.options]
       };
     }
@@ -196,6 +199,7 @@ export function prepareQuizQuestions({
 
     return {
       ...q,
+      question: cleanedQuestion,
       options: newOptions,
       correctAnswer: newCorrectAnswer,
       originalOptions: q.options,

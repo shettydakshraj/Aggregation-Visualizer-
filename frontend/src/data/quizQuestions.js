@@ -3,6 +3,7 @@
 // Designed for timed evaluation, competitive exams, and rigorous reasoning.
 
 export { formatQuestionSource } from '../utils/questionSource.js';
+export { cleanQuestionText, sanitizeQuestion } from '../utils/textCleaner.js';
 
 export const QUIZ_TOPICS = [
   "All Topics",
@@ -215,7 +216,7 @@ export const QUIZ_QUESTIONS = [
     "source": "GATE",
     "exam": "Computer Science & Information Technology",
     "year": 2020,
-    "question": "[Assessment Test Item #6] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 1 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -249,7 +250,7 @@ export const QUIZ_QUESTIONS = [
     "source": "NIELIT",
     "exam": "Scientist 'B' (Computer Science)",
     "year": 2021,
-    "question": "[Assessment Test Item #7] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 1 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -282,7 +283,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "Original Practice",
     "year": null,
-    "question": "[Assessment Test Item #8] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 1 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -307,7 +308,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #9] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 1 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -332,7 +333,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #10] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 1 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -357,7 +358,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #11] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 1 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -382,7 +383,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #12] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 1 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -407,7 +408,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #13] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 1 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -432,7 +433,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #14] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 1 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -457,7 +458,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #15] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 1 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -483,7 +484,7 @@ export const QUIZ_QUESTIONS = [
     "source": "GATE",
     "exam": "Computer Science & Information Technology",
     "year": 2021,
-    "question": "[Assessment Test Item #16] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 2 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -517,7 +518,7 @@ export const QUIZ_QUESTIONS = [
     "source": "GATE",
     "exam": "Computer Science & Information Technology",
     "year": 2013,
-    "question": "[Assessment Test Item #17] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 2 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -550,7 +551,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "Original Practice",
     "year": null,
-    "question": "[Assessment Test Item #18] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 2 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -575,7 +576,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #19] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 2 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -600,7 +601,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #20] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 2 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -625,7 +626,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #21] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 2 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -650,7 +651,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #22] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 2 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -675,7 +676,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #23] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 2 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -700,7 +701,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #24] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 2 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -725,7 +726,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #25] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 2 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -751,7 +752,7 @@ export const QUIZ_QUESTIONS = [
     "source": "GATE",
     "exam": "Computer Science & Information Technology",
     "year": 2022,
-    "question": "[Assessment Test Item #26] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 3 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -785,7 +786,7 @@ export const QUIZ_QUESTIONS = [
     "source": "ISRO",
     "exam": "Scientist/Engineer 'SC' (Computer Science)",
     "year": 2020,
-    "question": "[Assessment Test Item #27] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 3 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -818,7 +819,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "Original Practice",
     "year": null,
-    "question": "[Assessment Test Item #28] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 3 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -843,7 +844,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #29] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 3 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -868,7 +869,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #30] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 3 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -893,7 +894,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #31] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 3 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -918,7 +919,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #32] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 3 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -943,7 +944,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #33] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 3 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -968,7 +969,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #34] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 3 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -993,7 +994,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #35] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 3 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1019,7 +1020,7 @@ export const QUIZ_QUESTIONS = [
     "source": "GATE",
     "exam": "Computer Science & Information Technology",
     "year": 2023,
-    "question": "[Assessment Test Item #36] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 4 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1053,7 +1054,7 @@ export const QUIZ_QUESTIONS = [
     "source": "UGC NET",
     "exam": "Computer Science and Applications",
     "year": 2022,
-    "question": "[Assessment Test Item #37] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 4 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1086,7 +1087,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #38] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 4 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1111,7 +1112,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #39] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 4 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1136,7 +1137,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #40] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 4 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1161,7 +1162,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #41] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 4 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1186,7 +1187,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #42] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 4 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1211,7 +1212,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #43] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 4 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1236,7 +1237,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #44] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 4 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1261,7 +1262,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #45] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 4 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1286,7 +1287,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #46] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 5 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1311,7 +1312,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #47] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 5 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1336,7 +1337,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #48] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 5 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1361,7 +1362,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #49] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 5 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1386,7 +1387,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #50] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 5 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1411,7 +1412,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #51] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 5 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1436,7 +1437,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #52] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 5 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1461,7 +1462,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #53] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 5 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1486,7 +1487,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #54] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 5 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1511,7 +1512,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #55] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 5 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1536,7 +1537,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #56] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 6 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1561,7 +1562,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #57] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 6 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1586,7 +1587,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #58] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 6 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1611,7 +1612,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #59] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 6 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1636,7 +1637,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #60] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 6 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1661,7 +1662,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #61] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 6 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1686,7 +1687,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #62] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 6 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1711,7 +1712,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #63] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 6 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1736,7 +1737,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #64] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 6 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1761,7 +1762,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #65] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 6 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -1786,7 +1787,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #66] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 7 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1811,7 +1812,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #67] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 7 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1836,7 +1837,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #68] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 7 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1861,7 +1862,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #69] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 7 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1886,7 +1887,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #70] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 7 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1911,7 +1912,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #71] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 7 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -1936,7 +1937,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #72] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 7 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1961,7 +1962,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #73] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 7 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -1986,7 +1987,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #74] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 7 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2011,7 +2012,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #75] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 7 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2036,7 +2037,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #76] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 8 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2061,7 +2062,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #77] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 8 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2086,7 +2087,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #78] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 8 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2111,7 +2112,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #79] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 8 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2136,7 +2137,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #80] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 8 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2161,7 +2162,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #81] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 8 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2186,7 +2187,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #82] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 8 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2211,7 +2212,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #83] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 8 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2236,7 +2237,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #84] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 8 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2261,7 +2262,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #85] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 8 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2286,7 +2287,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #86] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 9 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2311,7 +2312,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #87] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 9 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2336,7 +2337,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #88] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 9 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2361,7 +2362,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #89] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 9 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2386,7 +2387,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #90] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 9 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2411,7 +2412,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #91] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 9 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2436,7 +2437,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #92] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 9 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2461,7 +2462,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #93] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 9 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2486,7 +2487,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #94] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 9 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2511,7 +2512,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #95] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 9 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2536,7 +2537,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #96] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 10 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2561,7 +2562,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #97] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 10 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2586,7 +2587,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #98] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 10 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2611,7 +2612,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #99] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 10 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2636,7 +2637,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #100] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 10 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2661,7 +2662,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #101] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 10 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2686,7 +2687,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #102] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 10 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2711,7 +2712,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #103] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 10 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2736,7 +2737,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #104] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 10 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2761,7 +2762,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #105] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 10 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -2786,7 +2787,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #106] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 11 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2811,7 +2812,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #107] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 11 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2836,7 +2837,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #108] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 11 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2861,7 +2862,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #109] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 11 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2886,7 +2887,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #110] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 11 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2911,7 +2912,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #111] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 11 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -2936,7 +2937,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #112] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 11 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2961,7 +2962,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #113] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 11 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -2986,7 +2987,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #114] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 11 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3011,7 +3012,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #115] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 11 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3036,7 +3037,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #116] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 12 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3061,7 +3062,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #117] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 12 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3086,7 +3087,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #118] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 12 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3111,7 +3112,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #119] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 12 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3136,7 +3137,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #120] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 12 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3161,7 +3162,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #121] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 12 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3186,7 +3187,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #122] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 12 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3211,7 +3212,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #123] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 12 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3236,7 +3237,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #124] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 12 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3261,7 +3262,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #125] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 12 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3286,7 +3287,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #126] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 13 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3311,7 +3312,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #127] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 13 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3336,7 +3337,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #128] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 13 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3361,7 +3362,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #129] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 13 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3386,7 +3387,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #130] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 13 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3411,7 +3412,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #131] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 13 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3436,7 +3437,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #132] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 13 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3461,7 +3462,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #133] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 13 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3486,7 +3487,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #134] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 13 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3511,7 +3512,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #135] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 13 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3536,7 +3537,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #136] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 14 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3561,7 +3562,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #137] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 14 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3586,7 +3587,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #138] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 14 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3611,7 +3612,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #139] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 14 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3636,7 +3637,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #140] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 14 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3661,7 +3662,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #141] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 14 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3686,7 +3687,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #142] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 14 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3711,7 +3712,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #143] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 14 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3736,7 +3737,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #144] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 14 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3761,7 +3762,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #145] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 14 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -3786,7 +3787,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #146] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 15 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3811,7 +3812,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #147] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 15 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3836,7 +3837,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #148] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 15 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3861,7 +3862,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #149] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 15 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3886,7 +3887,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #150] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 15 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3911,7 +3912,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #151] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 15 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -3936,7 +3937,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #152] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 15 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3961,7 +3962,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #153] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 15 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -3986,7 +3987,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #154] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 15 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -4011,7 +4012,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #155] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 15 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -4036,7 +4037,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #156] If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs? (Variant 16 - Cardinality Bounds)",
+    "question": "If relation R has N tuples and column C has K distinct values, what are the minimum and maximum possible rows in \"SELECT C, COUNT(*) FROM R GROUP BY C\" assuming no NULLs?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4061,7 +4062,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #157] In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999? (Variant 16 - Functional Dependencies)",
+    "question": "In a query \"SELECT S.sid, S.sname, AVG(E.grade) FROM Student S, Enrolls E WHERE S.sid=E.sid GROUP BY S.sid\", under what condition is omitting S.sname from GROUP BY permitted in SQL:1999?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4086,7 +4087,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Conceptual",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #158] What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table? (Variant 16 - COUNT on Empty Table)",
+    "question": "What is the exact result of executing \"SELECT COUNT(emp_id), COUNT(*), SUM(salary) FROM employees\" on a completely empty table?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4111,7 +4112,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #159] Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL? (Variant 16 - MIN and MAX on Strings)",
+    "question": "Can MIN() and MAX() aggregate functions be executed over VARCHAR or CHAR textual columns in ANSI SQL?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4136,7 +4137,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #160] Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause? (Variant 16 - HAVING without SELECT Aggregate)",
+    "question": "Is a query valid where an aggregate expression is present in the HAVING clause but NOT in the SELECT clause?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4161,7 +4162,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #161] Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"? (Variant 16 - Predicate Pushdown)",
+    "question": "Why can a query optimizer push a predicate like \"WHERE dept = 'IT'\" down to storage scans, but CANNOT push down \"HAVING COUNT(*) > 5\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY col_a, col_b;",
     "table": null,
     "options": [
@@ -4186,7 +4187,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #162] Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"? (Variant 16 - Grouping Sets Equivalence)",
+    "question": "Which of the following explicit GROUPING SETS expressions is logically identical to \"GROUP BY ROLLUP(A, B)\"?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -4211,7 +4212,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Debugging",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #163] To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied? (Variant 16 - Null Filtering with GROUPING)",
+    "question": "To eliminate the grand total row from a ROLLUP(Dept) query while retaining all department subtotal rows, which HAVING clause should be applied?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY ROLLUP(col_a, col_b);",
     "table": null,
     "options": [
@@ -4236,7 +4237,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Exam Style",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #164] Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric? (Variant 16 - Symmetry Property)",
+    "question": "Why is the CUBE operation described as symmetric across its grouping columns, whereas ROLLUP is described as asymmetric?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [
@@ -4261,7 +4262,7 @@ export const QUIZ_QUESTIONS = [
     "type": "Query Output",
     "source": "AI-Generated Exam-Style",
     "year": null,
-    "question": "[Assessment Test Item #165] In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated? (Variant 16 - GROUPING_ID Bitmask)",
+    "question": "In advanced SQL engines, what does the GROUPING_ID(A, B) function return for the grand total row () where both A and B are aggregated?",
     "sql": "SELECT col_a, col_b, COUNT(*), SUM(metric_val)\nFROM assessment_matrix\nGROUP BY CUBE(col_a, col_b);",
     "table": null,
     "options": [

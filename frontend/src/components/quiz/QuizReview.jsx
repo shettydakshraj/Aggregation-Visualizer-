@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Quiz.module.css';
 import { formatQuestionSource } from '../../utils/questionSource';
+import { cleanQuestionText } from '../../utils/textCleaner';
 
 export default function QuizReview({ reviews }) {
   const [activeFilter, setActiveFilter] = useState('all'); // 'all' | 'correct' | 'incorrect' | 'unanswered'
@@ -120,7 +121,7 @@ export default function QuizReview({ reviews }) {
 
               {/* Question Text */}
               <div className={styles.reviewQuestionText}>
-                {question.question}
+                {cleanQuestionText(question.question)}
               </div>
 
               {/* Table if present */}

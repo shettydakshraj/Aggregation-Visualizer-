@@ -13,6 +13,7 @@ import {
   AlignmentType
 } from 'docx';
 import { formatTime } from '../components/quiz/quizUtils.js';
+import { cleanQuestionText } from '../utils/textCleaner.js';
 
 /**
  * Helper to trigger file download in the browser
@@ -183,7 +184,7 @@ export function downloadQuizPdf(config, resultData, dateString) {
     doc.setTextColor(30, 41, 59);
 
     // Split long question prompt into multiple lines
-    const qLines = doc.splitTextToSize(r.question.question, contentWidth);
+    const qLines = doc.splitTextToSize(cleanQuestionText(r.question.question), contentWidth);
     doc.text(qLines, leftMargin, y);
     y += qLines.length * 4.2;
 
@@ -385,7 +386,7 @@ export async function downloadQuizDocx(config, resultData, dateString) {
           new TextRun({ text: outcome, bold: true, color: r.isCorrect ? '16A34A' : 'DC2626' })
         ]
       }),
-      new Paragraph({ children: [new TextRun(r.question.question)] }),
+      new Paragraph({ children: [new TextRun(cleanQuestionText(r.question.question))] }),
       new Paragraph({
         children: [
           new TextRun({ text: 'Your Answer: ', bold: true }),
@@ -473,7 +474,7 @@ export function downloadQuizTxt(config, resultData, dateString) {
     const correctAns = `${letters[r.correctAnswer]}. ${r.options[r.correctAnswer]}`;
 
     txt += `Question ${idx + 1} [${r.question.topic} | ${r.question.difficulty}] -> ${outcome}\n`;
-    txt += `${r.question.question}\n`;
+    txt += `${cleanQuestionText(r.question.question)}\n`;
     if (r.question.sql) {
       txt += `SQL Snippet:\n${r.question.sql}\n`;
     }
