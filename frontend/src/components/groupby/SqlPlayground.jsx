@@ -13,6 +13,28 @@ const DEFAULT_DATA = [
   { id: 8, project: 'Coastal Highway Viaduct', material: 'Concrete', location: 'Coastal Bay', cost: 510000 },
 ];
 
+const isCurrencyCol = (colName) => {
+  if (!colName || typeof colName !== 'string') return false;
+  const l = colName.toLowerCase();
+  if (l.includes('count') || l.includes('project') || l.includes('qty') || l.includes('quantity') || l.includes('row') || l.includes('num') || l.includes('id')) {
+    return false;
+  }
+  return (
+    l.includes('cost') ||
+    l.includes('salary') ||
+    l.includes('budget') ||
+    l.includes('wage') ||
+    l.includes('amount') ||
+    l.includes('revenue') ||
+    l.includes('price') ||
+    l.includes('expense') ||
+    l.includes('spent') ||
+    l.includes('investment') ||
+    l.includes('payroll') ||
+    l.includes('inr')
+  );
+};
+
 export default function SqlPlayground() {
   const [data, setData] = useState(DEFAULT_DATA);
   const [activeTab, setActiveTab] = useState('query'); // 'query' | 'data'
@@ -317,9 +339,15 @@ export default function SqlPlayground() {
                           <tr key={idx}>
                             {Object.entries(row).map(([k, val]) => (
                               <td key={k}>
-                                {typeof val === 'number' && (k.toLowerCase().includes('cost') || k.toLowerCase().includes('sum') || k.toLowerCase().includes('avg') || k.toLowerCase().includes('min') || k.toLowerCase().includes('max') || k.toLowerCase().includes('amount') || k.toLowerCase().includes('budget') || k.toLowerCase().includes('salary'))
-                                  ? `₹${val.toLocaleString()}`
-                                  : String(val)}
+                                {val === null || val === undefined ? (
+                                  <span style={{ opacity: 0.5, fontStyle: 'italic' }}>NULL</span>
+                                ) : typeof val === 'number' && isCurrencyCol(k) ? (
+                                  `₹${val.toLocaleString()}`
+                                ) : typeof val === 'number' ? (
+                                  val.toLocaleString()
+                                ) : (
+                                  String(val)
+                                )}
                               </td>
                             ))}
                           </tr>
